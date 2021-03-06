@@ -10,7 +10,7 @@
 ## 程序介绍
 开发环境:Java 1.8
 
-用于检测ipa/Android的信息
+用于读取ipa/Android的信息
 
 ## 使用说明
 
