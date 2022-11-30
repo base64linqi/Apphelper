@@ -23,7 +23,7 @@ jobs:
         run: mkdir artifacts
 
       - name: 4. 项目打包
-        run: cd PackageHeleper && mvn clean package -Dmaven.test.skip=true
+        run: cd PackageHelper && mvn clean package -Dmaven.test.skip=true
 
       - name: 5.upload artifacts
         uses: actions/upload-artifact@v2
