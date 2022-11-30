@@ -77,7 +77,7 @@ public class MainWindow implements IDropHandler {
 	private void initialize() {
 		frame = new DragFrame();
 		frame.setDropHandler(this);
-		frame.setTitle("AppHelper 1.4");
+		frame.setTitle("AppHelper");
 
 
 

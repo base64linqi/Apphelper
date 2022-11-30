@@ -1,0 +1,34 @@
+name: ci
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1.Check out git repository
+        uses: actions/checkout@v2
+
+      - name: 2. 设置jdk
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+          cache: 'maven'
+
+      - name: 3. 项目打包
+        run: cd PackageHelper && mvn clean package -Dmaven.test.skip=true
+
+      - name: 4.upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: dist_electron
+
+      - name: 5.release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "artifacts/**"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
