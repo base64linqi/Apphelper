@@ -2,9 +2,8 @@ name: ci
 
 on:
   push:
-    branches:
-      - dev
-
+    tags:
+      - 'v*.*.*'
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -19,18 +18,15 @@ jobs:
           java-version: '8'
           cache: 'maven'
 
-      - name: 3.创建artifacts
-        run: mkdir artifacts
-
-      - name: 4. 项目打包
+      - name: 3. 项目打包
         run: cd PackageHelper && mvn clean package -Dmaven.test.skip=true
 
-      - name: 5.upload artifacts
+      - name: 4.upload artifacts
         uses: actions/upload-artifact@v2
         with:
           path: dist_electron
 
-      - name: 6.release
+      - name: 5.release
         uses: softprops/action-gh-release@v1
         with:
           files: "artifacts/**"
